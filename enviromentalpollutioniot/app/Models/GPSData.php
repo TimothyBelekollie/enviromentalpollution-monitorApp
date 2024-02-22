@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class GPSData extends Model
 {
     use HasFactory;
+    protected $fillable=['longitude','latitude','sensor_data_id'];
 }

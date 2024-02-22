@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->float('latitude');
             $table->float('longitude');
-            $table->unsignedBigInteger('sensor_data');
-            $table->foreign('sensor_data')->references('id')->on('sensor_data');
+            $table->unsignedBigInteger('sensor_data_id');
+            $table->foreign('sensor_data_id')->references('id')->on('sensor_data');
             $table->timestamp('timestamp')->nullable();
             $table->timestamps();
         });
