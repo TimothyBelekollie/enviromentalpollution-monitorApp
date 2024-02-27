@@ -49,7 +49,7 @@ class SensorDataController extends Controller
 public function store(Request $request)
 {
     // Log all request headers
-    \Log::info('data: ', $request->all());
+ //   \Log::info('data: ', $request->all());
 
     // Parse the incoming request payload
     $data = $request->all();
@@ -80,4 +80,37 @@ public function store(Request $request)
     return response()->json(['message' => $data], 200);
 }
 
+
+public function fetchSensorData()
+{
+    $sensorData = SensorData::latest()->first();
+    return response()->json($sensorData);
+}
+
+
+public function getMQ135Data()
+{
+   
+    $data = SensorData::latest('created_at')->take(10)->get(['created_at', 'alcohol_concentration']);
+
+    return response()->json($data);
+}
+
+public function getMQ7Data()
+{
+       // Fetch the most recent AQI data from the sensor_data table
+    $data = SensorData::latest('created_at')->take(10)->get(['created_at', 'air_quality_index']);
+
+    return response()->json($data);
+}
+
+
+
+public function latestGPS(Request $request)
+{
+    // Retrieve the latest GPS data
+    $latestGPSData = GPSData::latest()->first();
+
+    return response()->json($latestGPSData);
+}
 }
